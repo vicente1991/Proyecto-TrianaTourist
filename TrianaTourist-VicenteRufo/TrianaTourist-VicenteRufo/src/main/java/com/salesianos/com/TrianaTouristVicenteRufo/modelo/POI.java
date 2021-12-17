@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @Builder
-public class POI  implements Serializable {
+public class POI implements Serializable {
 
 
     @Id
@@ -21,6 +21,7 @@ public class POI  implements Serializable {
 
     private String name;
     private String location;
+    @Lob
     private String description;
     private LocalDateTime date;
     @ManyToOne
