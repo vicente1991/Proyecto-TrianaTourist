@@ -1,9 +1,8 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.errores;
 
-import com.salesianostriana.dam.errores.excepciones.EntityNotFoundException;
-import com.salesianostriana.dam.errores.modelo.ApiError;
-import com.salesianostriana.dam.errores.modelo.ApiSubError;
-import com.salesianostriana.dam.errores.modelo.ApiValidationSubError;
+import com.salesianos.com.TrianaTouristVicenteRufo.errores.modelo.ApiError;
+import com.salesianos.com.TrianaTouristVicenteRufo.errores.modelo.ApiSubError;
+import com.salesianos.com.TrianaTouristVicenteRufo.errores.modelo.ApiValidationSubError;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
