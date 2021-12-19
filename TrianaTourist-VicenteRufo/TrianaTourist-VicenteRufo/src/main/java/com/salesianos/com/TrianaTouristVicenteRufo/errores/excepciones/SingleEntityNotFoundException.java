@@ -1,5 +1,7 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones;
 
+import javax.persistence.EntityNotFoundException;
+
 public class SingleEntityNotFoundException extends EntityNotFoundException {
 
     public SingleEntityNotFoundException(String id, Class clazz) {

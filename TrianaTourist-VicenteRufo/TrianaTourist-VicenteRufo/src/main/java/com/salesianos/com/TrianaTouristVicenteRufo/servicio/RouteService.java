@@ -29,7 +29,7 @@ public class RouteService extends BaseService<Route,Long, RouteRepository> {
 
     public Optional<Route> findById(Long id){
         if( routeRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,Route.class);
         }else{
             return this.routeRepository.findById(id);
         }
@@ -39,7 +39,7 @@ public class RouteService extends BaseService<Route,Long, RouteRepository> {
 
     public void deleteById(Long id){
         if(routeRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,Route.class);
         }else{
             routeRepository.deleteById(id);
         }

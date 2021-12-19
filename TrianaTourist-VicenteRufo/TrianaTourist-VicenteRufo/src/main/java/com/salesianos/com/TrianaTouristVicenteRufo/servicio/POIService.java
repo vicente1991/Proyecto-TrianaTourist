@@ -29,7 +29,7 @@ public class POIService extends BaseService<POI,Long, POIRepository> {
 
     public Optional<POI> findById(Long id){
         if(poiRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,POI.class);
         }else{
             return this.poiRepository.findById(id);
         }
@@ -39,7 +39,7 @@ public class POIService extends BaseService<POI,Long, POIRepository> {
 
     public void deleteById(Long id){
         if (poiRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,POI.class);
         }else{
             poiRepository.deleteById(id);
         }
