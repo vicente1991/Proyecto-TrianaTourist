@@ -37,4 +37,11 @@ public class POI implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
     private List<Route>routeList= new ArrayList<>();
+
+    public void add(Route route){
+        route.getPoiList().add(this);
+    }
+    public void delete(Route route){
+        route.getPoiList().remove(this);
+    }
 }

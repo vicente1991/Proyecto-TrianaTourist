@@ -2,10 +2,7 @@ package com.salesianos.com.TrianaTouristVicenteRufo.modelo;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,5 +17,6 @@ public class Route implements Serializable {
 
     private String name;
 
+    @ManyToMany
     private List<POI> poiList;
 }
