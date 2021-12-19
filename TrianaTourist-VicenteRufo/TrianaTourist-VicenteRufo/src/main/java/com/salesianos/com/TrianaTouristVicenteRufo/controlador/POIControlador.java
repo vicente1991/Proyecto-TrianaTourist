@@ -29,7 +29,8 @@ public class POIControlador {
 
     @GetMapping("/{id}")
     public ResponseEntity<GetPOIdto> findOne(@PathVariable Long id){
-        return ResponseEntity.ok().body(converterPOIdto.converterPOIToPOIdto(poiService.findById(id).get()));//mirar si funciona
+        Optional<POI> p= poiService.findById(id);
+        return ResponseEntity.ok().body(converterPOIdto.converterPOIToPOIdto(p.get()));//mirar si funciona
     }
 
     @DeleteMapping("{id}")

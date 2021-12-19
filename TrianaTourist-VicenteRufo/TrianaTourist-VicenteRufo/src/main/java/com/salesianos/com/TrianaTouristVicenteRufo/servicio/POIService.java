@@ -1,11 +1,14 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.servicio;
 
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.ConverterPOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.EntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.ListEntityNotFoundException;
+import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.SingleEntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
+import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.CategoriaRepository;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.POIRepository;
-import com.salesianos.com.TrianaTouristVicenteRufo.servicio.base.BaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,23 +16,26 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class POIService extends BaseService<POI,Long, POIRepository> {
+public class POIService extends {
 
 
     private final POIRepository poiRepository;
+    private final ConverterPOIdto converterPOIdto;
+    private final CategoriaRepository categoriaRepository;
 
 
     public List<POI> findAll(){
-        if (poiRepository.findAll().isEmpty()){
-            throw new ListEntityNotFoundException(POIService.class);
+
+        if (poiRepository.findAll().isEmpty()) {
+            throw new ListEntityNotFoundException(POI.class);
         }else{
-            return this.poiRepository.findAll();
+            return poiRepository.findAll();
         }
     }
 
     public Optional<POI> findById(Long id){
         if(poiRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id,POI.class);
+            throw new SingleEntityNotFoundException(id.toString(),POI.class);
         }else{
             return this.poiRepository.findById(id);
         }

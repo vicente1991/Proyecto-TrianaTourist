@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RouteService extends BaseService<Route,Long, RouteRepository> {
+public class RouteService extends {
 
 
     private final RouteRepository routeRepository;

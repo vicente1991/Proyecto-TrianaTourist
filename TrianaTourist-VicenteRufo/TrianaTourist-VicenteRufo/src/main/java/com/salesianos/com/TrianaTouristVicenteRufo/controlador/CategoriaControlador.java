@@ -26,31 +26,25 @@ public class CategoriaControlador {
     private final ConverterDTOCategoria converterDTOCategoria;
 
     @GetMapping("/")
-    public ResponseEntity<List<Categoria>> findAll(){ return ResponseEntity.ok().body(categoriaService.findAll());}
+    public ResponseEntity<List<GetDTOCategoria>> findAll(){ return categoriaService.findAlll();}
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetDTOCategoria> findOne(Long id){
-        return ResponseEntity.ok().body(converterDTOCategoria.createCategoriaToCategoriaDTO(categoriaService.findById(id).get()));
+    public ResponseEntity<List<GetDTOCategoria>> findOne(Long id){
+        return categoriaService.findById(id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
-        categoriaService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return categoriaService.delete(id);
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetDTOCategoria> crear(@Valid @RequestBody CreateDTOCategoria c){
-        categoriaService.save(converterDTOCategoria.createCategoriaDTOToCategoria(c));
-        return ResponseEntity.status(HttpStatus.CREATED).body(converterDTOCategoria.createCategoriaToCategoriaDTO(converterDTOCategoria.createCategoriaDTOToCategoria(c)));
+    public ResponseEntity<Categoria> crear(@Valid @RequestBody CreateDTOCategoria c){
+        return categoriaService.save(c);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<GetDTOCategoria>> editar(@PathVariable Long id,@Valid @RequestBody CreateDTOCategoria c){
-        return ResponseEntity.ok().body(categoriaService.findById(id).map(nuevonombre ->{
-            nuevonombre.setName(c.getName());
-            categoriaService.edit(nuevonombre);
-            return converterDTOCategoria.createCategoriaToCategoriaDTO(nuevonombre);
-        }));
+    public ResponseEntity<Categoria> editar(@PathVariable("id") Long id,@Valid @RequestBody CreateDTOCategoria c){
+      return categoriaService.edit(c,id);
     }
 }

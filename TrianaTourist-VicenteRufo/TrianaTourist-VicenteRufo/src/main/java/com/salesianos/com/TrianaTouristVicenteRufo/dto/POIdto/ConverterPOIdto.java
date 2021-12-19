@@ -2,6 +2,7 @@ package com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto;
 
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
+import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.CategoriaRepository;
 import com.salesianos.com.TrianaTouristVicenteRufo.servicio.CategoriaService;
 import org.springframework.stereotype.Component;
 
@@ -10,16 +11,15 @@ import java.util.Optional;
 @Component
 public class ConverterPOIdto {
 
-    private CategoriaService categoriaService;
+    private CategoriaRepository categoriaRepository;
 
     public POI converterPOIdtoToPOI(CreatePOIdto c){
-        Optional<Categoria> categoria = categoriaService.findById(c.getCategoria());
         return POI.builder()
                 .name(c.getName())
                 .location(c.getLocation())
                 .date(c.getDateTime())
                 .description(c.getDescription())
-                .categoria(categoria.get())
+                .categoria(categoriaRepository.findById(c.getCategoria()).get())
                 .coverPhoto(c.getCoverPhoto())
                 .photo2(c.getPhoto2())
                 .photo3(c.getPhoto3())
