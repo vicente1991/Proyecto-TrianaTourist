@@ -22,7 +22,7 @@ public class CategoriaService extends BaseService<Categoria,Long, CategoriaRepos
 
     public List<Categoria> findAlll(){
         if( categoriaRepository.findAll().isEmpty()){
-            throw new ListEntityNotFoundException(CategoriaService.class);
+            throw new ListEntityNotFoundException(Categoria.class);
         }else{
             return this.categoriaRepository.findAll();
         }
@@ -30,7 +30,7 @@ public class CategoriaService extends BaseService<Categoria,Long, CategoriaRepos
 
     public Optional<Categoria> findById(Long id){
         if(categoriaRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,Categoria.class);
         }else{
             return this.categoriaRepository.findById(id);
         }
@@ -40,7 +40,7 @@ public class CategoriaService extends BaseService<Categoria,Long, CategoriaRepos
 
     public void deleteById(Long id){
         if( categoriaRepository.findById(id).isEmpty()){
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException(id,Categoria.class);
         }else{
             categoriaRepository.deleteById(id);
         }

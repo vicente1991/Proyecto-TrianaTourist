@@ -2,7 +2,7 @@ package com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones;
 
 public class EntityNotFoundException extends RuntimeException{
 
-    public EntityNotFoundException(Long id) {
+    public EntityNotFoundException(Long id,Class c) {
         super("No se encontro el punto de interes con el siguiente id" + id);
     }
 }

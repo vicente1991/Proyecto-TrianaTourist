@@ -21,7 +21,7 @@ public class CreatePOIdto {
     @Pattern(regexp ="^([-+]?\\d{1,2}[.]\\d+),\\s*([-+]?\\d{1,3}[.]\\d+)$",message = "Cambia al formato correcto")
     private String location;
     private String description;
-    private Categoria categoria;
+    private Long categoria;
     private LocalDateTime dateTime;
     @NotBlank
     @Pattern(regexp = "(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))")
