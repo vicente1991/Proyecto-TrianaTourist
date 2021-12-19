@@ -4,6 +4,7 @@ import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.CategoriaRepository;
 import com.salesianos.com.TrianaTouristVicenteRufo.servicio.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -11,6 +12,7 @@ import java.util.Optional;
 @Component
 public class ConverterPOIdto {
 
+    @Autowired
     private CategoriaRepository categoriaRepository;
 
     public POI converterPOIdtoToPOI(CreatePOIdto c){
@@ -23,7 +25,6 @@ public class ConverterPOIdto {
                 .coverPhoto(c.getCoverPhoto())
                 .photo2(c.getPhoto2())
                 .photo3(c.getPhoto3())
-                .routeList(c.getRouteList())
                 .build();
     }
 
@@ -38,7 +39,6 @@ public class ConverterPOIdto {
                 .coverPhoto(p.getCoverPhoto())
                 .photo2(p.getPhoto2())
                 .photo3(p.getPhoto3())
-                .routes(p.getRouteList())
                 .build();
     }
 }

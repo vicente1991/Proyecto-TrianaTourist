@@ -30,6 +30,5 @@ public class CreatePOIdto {
     private String photo2;
     @Pattern(regexp = "(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))")
     private String photo3;
-    private List<Route> routeList;
 
 }

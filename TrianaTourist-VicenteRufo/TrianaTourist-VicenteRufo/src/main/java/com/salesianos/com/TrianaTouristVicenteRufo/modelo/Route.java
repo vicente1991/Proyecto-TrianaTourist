@@ -18,5 +18,9 @@ public class Route implements Serializable {
     private String name;
 
     @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "poi_id"),
+            inverseJoinColumns = @JoinColumn(name = "route_id")
+    )
     private List<POI> poiList;
 }

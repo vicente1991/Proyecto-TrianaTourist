@@ -3,6 +3,7 @@ package com.salesianos.com.TrianaTouristVicenteRufo.controlador;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.ConverterPOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.CreatePOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.GetPOIdto;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.categoriaDTO.GetDTOCategoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
 import com.salesianos.com.TrianaTouristVicenteRufo.servicio.CategoriaService;
 import com.salesianos.com.TrianaTouristVicenteRufo.servicio.POIService;
@@ -41,8 +42,10 @@ public class POIControlador {
 
     @PostMapping("/")
     public ResponseEntity<GetPOIdto> crear(@Valid @RequestBody CreatePOIdto c){
-        poiService.save(converterPOIdto.converterPOIdtoToPOI(c));
-        return ResponseEntity.ok().body(converterPOIdto.converterPOIToPOIdto(converterPOIdto.converterPOIdtoToPOI(c)));
+        POI p= converterPOIdto.converterPOIdtoToPOI(c);
+        poiService.save(p);
+        GetPOIdto dto= converterPOIdto.converterPOIToPOIdto(p);
+        return ResponseEntity.ok().body(dto);
     }
 
     @PutMapping("/{id}")

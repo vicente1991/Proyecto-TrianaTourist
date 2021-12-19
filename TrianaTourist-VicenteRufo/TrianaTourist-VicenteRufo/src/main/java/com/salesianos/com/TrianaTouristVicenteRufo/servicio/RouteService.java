@@ -4,7 +4,6 @@ import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.EntityNot
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.ListEntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.RouteRepository;
-import com.salesianos.com.TrianaTouristVicenteRufo.servicio.base.BaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RouteService extends {
+public class RouteService {
 
 
     private final RouteRepository routeRepository;

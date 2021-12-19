@@ -31,12 +31,6 @@ public class POI implements Serializable {
     private String photo2;
     private String photo3;
 
-    @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "poi_id"),
-            inverseJoinColumns = @JoinColumn(name = "route_id")
-    )
-    private List<Route>routeList= new ArrayList<>();
 
     public void add(Route route){
         route.getPoiList().add(this);

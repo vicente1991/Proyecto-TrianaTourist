@@ -1,14 +1,13 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.servicio;
 
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.ConverterPOIdto;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.CreatePOIdto;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.GetPOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.EntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.ListEntityNotFoundException;
-import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.SingleEntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
-import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.CategoriaRepository;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.POIRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +15,12 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class POIService extends {
+public class POIService {
 
 
     private final POIRepository poiRepository;
     private final ConverterPOIdto converterPOIdto;
-    private final CategoriaRepository categoriaRepository;
+    private final CategoriaService categoriaService;
 
 
     public List<POI> findAll(){
@@ -35,7 +34,7 @@ public class POIService extends {
 
     public Optional<POI> findById(Long id){
         if(poiRepository.findById(id).isEmpty()){
-            throw new SingleEntityNotFoundException(id.toString(),POI.class);
+            throw new EntityNotFoundException(id,POI.class);
         }else{
             return this.poiRepository.findById(id);
         }
@@ -51,6 +50,18 @@ public class POIService extends {
         }
     }
 
-    public POI edit(POI poi){return poiRepository.save(poi);}
+    public Optional<GetPOIdto> edit(Long id, CreatePOIdto poi){
+        return findById(id).map(nuevo ->{
+            nuevo.setName(poi.getName());
+            nuevo.setDescription(poi.getDescription());
+            nuevo.setLocation(poi.getLocation());
+            nuevo.setCategoria(categoriaService.findById(poi.getCategoria()).get());
+            nuevo.setCoverPhoto(poi.getCoverPhoto());
+            nuevo.setPhoto2(poi.getPhoto2());
+            nuevo.setPhoto3(poi.getPhoto3());
+            save(nuevo);
+            return converterPOIdto.converterPOIToPOIdto(nuevo);
+        });
+    }
 
 }

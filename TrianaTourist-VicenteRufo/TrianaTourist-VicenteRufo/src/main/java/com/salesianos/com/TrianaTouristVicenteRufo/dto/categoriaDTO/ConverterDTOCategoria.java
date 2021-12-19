@@ -11,6 +11,8 @@ public class ConverterDTOCategoria {
                 .name(c.getName())
                 .build();
     }
+
+
     public GetDTOCategoria createCategoriaToCategoriaDTO(Categoria ca){
         return GetDTOCategoria.builder()
                 .id(ca.getId())
