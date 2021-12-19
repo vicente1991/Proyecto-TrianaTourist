@@ -1,5 +1,8 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.servicio;
 
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.ConverterDTORoute;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.CreateDTORoutes;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.GetDTORoutes;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.EntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.ListEntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
@@ -16,6 +19,7 @@ public class RouteService {
 
 
     private final RouteRepository routeRepository;
+    private final ConverterDTORoute dtoRoute;
 
 
     public List<Route> findAll(){
@@ -46,4 +50,12 @@ public class RouteService {
 
     public Route edit(Route route){return routeRepository.save(route);}
 
+    public Optional<GetDTORoutes> edit(Long id, CreateDTORoutes c){
+        return findById(id).map(nuevo ->{
+            nuevo.setName(c.getName());
+            nuevo.setPoiList(c.getPoiList());
+            save(nuevo);
+            return dtoRoute.createRouteToRouteDTO(nuevo);
+        });
+    }
 }
