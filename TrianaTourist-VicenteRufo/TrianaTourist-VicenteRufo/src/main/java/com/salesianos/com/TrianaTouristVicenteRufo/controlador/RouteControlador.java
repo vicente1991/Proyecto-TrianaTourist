@@ -37,8 +37,9 @@ public class RouteControlador {
 
     @PostMapping("/")
     public ResponseEntity<GetDTORoutes> crear(@Valid @PathVariable Long id, @Valid @RequestBody CreateDTORoutes c){
-        routeService.save(dtoRoute.createRouteDTOToRoute(c));
-        return ResponseEntity.status(HttpStatus.CREATED).body(dtoRoute.createRouteToRouteDTO(dtoRoute.createRouteDTOToRoute(c)));
+        Route r= dtoRoute.createRouteDTOToRoute(c);
+        routeService.save(r);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoRoute.createRouteToRouteDTO(r));
     }
 
     @DeleteMapping("/{id}")
