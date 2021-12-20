@@ -10,6 +10,7 @@ import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.RouteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,8 @@ public class RouteService {
         }
     }
 
-    public Route save(Route route){return routeRepository.save(route);}
+    public void save(Route r){routeRepository.save(r);}
+
 
     public void deleteById(Long id){
         if(routeRepository.findById(id).isEmpty()){
@@ -48,10 +50,8 @@ public class RouteService {
         }
     }
 
-    public Route edit(Route route){return routeRepository.save(route);}
-
-    public Optional<GetDTORoutes> edit(Long id, CreateDTORoutes c){
-        return findById(id).map(nuevo ->{
+    public Optional<GetDTORoutes> edit (Long id, CreateDTORoutes c){
+        return findById(id).map(nuevo -> {
             nuevo.setName(c.getName());
             nuevo.setPoiList(c.getPoiList());
             save(nuevo);

@@ -36,7 +36,7 @@ public class RouteControlador {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetDTORoutes> crear(@Valid @PathVariable Long id, @Valid @RequestBody CreateDTORoutes c){
+    public ResponseEntity<GetDTORoutes> crear(@Valid @RequestBody CreateDTORoutes c){
         Route r= dtoRoute.createRouteDTOToRoute(c);
         routeService.save(r);
         return ResponseEntity.status(HttpStatus.CREATED).body(dtoRoute.createRouteToRouteDTO(r));
@@ -53,11 +53,12 @@ public class RouteControlador {
         return ResponseEntity.ok().body(routeService.edit(id,dto));
     }
 
-    @PostMapping("/{id}/poi/{id2}")
+   @PostMapping("/{id}/poi/{id2}")
     public ResponseEntity<GetDTORoutes> añadirPOI(@Valid @PathVariable("id") Long id,@PathVariable("id2") Long id2){
         Route r = routeService.findById(id).get();
         POI p= poiService.findById(id2).get();
         p.add(r);
+        poiService.save(p);
         return ResponseEntity.ok().body(dtoRoute.createRouteToRouteDTO(r));
     }
 
@@ -65,7 +66,8 @@ public class RouteControlador {
     public ResponseEntity<GetDTORoutes> eliminarPOI(@Valid @PathVariable("id") Long id,@PathVariable("id2") Long id2){
         Route r = routeService.findById(id).get();
         POI p= poiService.findById(id2).get();
-        p.delete(r);;
+        p.delete(r);
+        poiService.save(p);
         return ResponseEntity.ok().body(dtoRoute.createRouteToRouteDTO(r));
     }
 }
