@@ -22,12 +22,12 @@ public class NoPhotoRepeatValidator implements ConstraintValidator<NoPhotoRepeat
             Object field = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(fotos[i]);
             for (int j = i + 1; j < fotos.length; j++) {
                 Object field2 = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(fotos[j]);
-                if (field == field2) {
-                    return true;
+                if (field.equals(field2)) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
     }
 
