@@ -17,12 +17,14 @@ public @interface NoPhotoRepeat {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
-    String[] fotos();
+    String coverPhoto();
+    String photo2();
+    String photo3();
 
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)
     @interface List{
-        String[] fotos();
+        NoPhotoRepeat[] value();
     }
 
 }

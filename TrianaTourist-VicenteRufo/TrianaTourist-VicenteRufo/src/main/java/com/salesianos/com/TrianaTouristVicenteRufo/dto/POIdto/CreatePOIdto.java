@@ -2,10 +2,12 @@ package com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto;
 
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
+import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple.NoPhotoRepeat;
 import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.simple.UniqueLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +17,14 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
+@NoPhotoRepeat.List({
+        @NoPhotoRepeat(
+                coverPhoto = "coverPhoto",
+                photo2 = "photo2",
+                photo3 = "photo3",
+                message = "Una de las fotos esta repetida, cambiala"
+        )
+})
 public class CreatePOIdto {
 
     @NotBlank
@@ -26,11 +36,11 @@ public class CreatePOIdto {
     private Long categoria;
     private LocalDateTime dateTime;
     @NotBlank
-    @Pattern(regexp = "(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))")
+    @URL
     private String coverPhoto;
-    @Pattern(regexp = "(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))")
+    @URL
     private String photo2;
-    @Pattern(regexp = "(http)?s?:?(\\/\\/[^\"']*\\.(?:png|jpg|jpeg|gif|png|svg))")
+    @URL
     private String photo3;
 
 }
