@@ -1,7 +1,7 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple;
 
 
-import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.validador.POINotMatchValidator;
+import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.validador.NoPhotoRepeatValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,8 +10,8 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = POINotMatchValidator.class)
-public @interface POINotMatch {
+@Constraint(validatedBy = NoPhotoRepeatValidator.class)
+public @interface NoPhotoRepeat {
 
     String message() default "Las fotos no deben coincidir";
     Class<?>[] groups() default {};
@@ -24,7 +24,7 @@ public @interface POINotMatch {
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)
     @interface List{
-        POINotMatch[] value();
+        String[] fotos();
     }
 
 }

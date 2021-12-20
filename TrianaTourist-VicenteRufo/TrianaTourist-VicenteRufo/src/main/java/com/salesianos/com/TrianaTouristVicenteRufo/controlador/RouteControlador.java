@@ -36,10 +36,9 @@ public class RouteControlador {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetDTORoutes> crear(@Valid @RequestBody CreateDTORoutes c){
-        Route r= dtoRoute.createRouteDTOToRoute(c);
-        routeService.save(r);
-        return ResponseEntity.status(HttpStatus.CREATED).body(dtoRoute.createRouteToRouteDTO(r));
+    public ResponseEntity<CreateDTORoutes> crear(@Valid @RequestBody CreateDTORoutes c){
+        routeService.save(c);
+        return ResponseEntity.status(HttpStatus.CREATED).body(c);
     }
 
     @DeleteMapping("/{id}")
@@ -49,8 +48,9 @@ public class RouteControlador {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<GetDTORoutes>> edit(@PathVariable Long id, @Valid @RequestBody CreateDTORoutes dto){
-        return ResponseEntity.ok().body(routeService.edit(id,dto));
+    public ResponseEntity<CreateDTORoutes> edit(@PathVariable Long id, @Valid @RequestBody CreateDTORoutes dto){
+        routeService.edit(id,dto);
+        return ResponseEntity.ok().body(dto);
     }
 
    @PostMapping("/{id}/poi/{id2}")

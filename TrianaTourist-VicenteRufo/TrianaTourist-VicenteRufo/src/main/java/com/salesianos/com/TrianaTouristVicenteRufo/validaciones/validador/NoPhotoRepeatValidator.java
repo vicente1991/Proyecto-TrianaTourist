@@ -1,19 +1,19 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.validaciones.validador;
 
-import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple.POINotMatch;
+import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple.NoPhotoRepeat;
 import org.springframework.beans.PropertyAccessorFactory;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class POINotMatchValidator implements ConstraintValidator<POINotMatch,String> {
+public class NoPhotoRepeatValidator implements ConstraintValidator<NoPhotoRepeat,String> {
 
     private String coverPhoto;
     private String photo2;
     private String photo3;
 
     @Override
-    public void initialize(POINotMatch constraintAnnotation) {
+    public void initialize(NoPhotoRepeat constraintAnnotation) {
         coverPhoto = constraintAnnotation.coverPhoto();
         photo2 = constraintAnnotation.photo2();
         photo3 = constraintAnnotation.photo3();

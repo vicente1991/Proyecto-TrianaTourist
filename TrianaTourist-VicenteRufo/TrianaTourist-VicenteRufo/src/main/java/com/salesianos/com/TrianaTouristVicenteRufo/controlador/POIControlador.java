@@ -41,26 +41,16 @@ public class POIControlador {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetPOIdto> crear(@Valid @RequestBody CreatePOIdto c){
-        POI p= converterPOIdto.converterPOIdtoToPOI(c);
-        poiService.save(p);
-        GetPOIdto dto= converterPOIdto.converterPOIToPOIdto(p);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<CreatePOIdto> crear(@Valid @RequestBody CreatePOIdto c){
+        POI poi = converterPOIdto.converterPOIdtoToPOI(c);
+        poiService.save(poi);
+        return ResponseEntity.ok().body(c);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<GetPOIdto>> edit(@PathVariable Long id, @Valid @RequestBody CreatePOIdto c){
-        return ResponseEntity.ok().body(poiService.findById(id).map(nuevo ->{
-            nuevo.setName(c.getName());
-            nuevo.setLocation(c.getLocation());
-            nuevo.setCategoria(categoriaService.findById(c.getCategoria()).get());
-            nuevo.setDescription(c.getDescription());
-            nuevo.setCoverPhoto(c.getCoverPhoto());
-            nuevo.setPhoto2(c.getPhoto2());
-            nuevo.setPhoto3(c.getPhoto3());
-            poiService.save(nuevo);
-            return converterPOIdto.converterPOIToPOIdto(nuevo);
-        }));
+    public ResponseEntity<CreatePOIdto> edit(@PathVariable Long id, @Valid @RequestBody CreatePOIdto c){
+        poiService.edit(id, c);
+       return ResponseEntity.ok().body(c);
     }
 
 }

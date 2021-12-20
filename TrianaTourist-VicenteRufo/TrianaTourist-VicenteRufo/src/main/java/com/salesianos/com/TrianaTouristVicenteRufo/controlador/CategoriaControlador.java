@@ -41,14 +41,15 @@ public class CategoriaControlador {
 
     @PostMapping("/")
     public ResponseEntity<GetDTOCategoria> crear(@Valid @RequestBody CreateDTOCategoria c){
-        Categoria ca = converterDTOCategoria.createCategoriaDTOToCategoria(c);
-         categoriaService.save(ca);
-         GetDTOCategoria dto = converterDTOCategoria.createCategoriaToCategoriaDTO(ca);
+        Categoria categoria = converterDTOCategoria.createCategoriaDTOToCategoria(c);
+        categoriaService.save(categoria);
+        GetDTOCategoria dto = converterDTOCategoria.createCategoriaToCategoriaDTO(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<GetDTOCategoria>> editar(@PathVariable("id") Long id,@Valid @RequestBody CreateDTOCategoria c){
-      return ResponseEntity.ok().body(categoriaService.edit(id,c));
+    public ResponseEntity<CreateDTOCategoria> editar(@PathVariable("id") Long id,@Valid @RequestBody CreateDTOCategoria c){
+        categoriaService.edit(id,c);
+      return ResponseEntity.ok().body(c);
     }
 }

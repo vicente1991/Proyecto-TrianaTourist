@@ -3,9 +3,12 @@ package com.salesianos.com.TrianaTouristVicenteRufo.servicio;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.ConverterPOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.CreatePOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.GetPOIdto;
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.CreateDTORoutes;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.EntityNotFoundException;
 import com.salesianos.com.TrianaTouristVicenteRufo.errores.excepciones.ListEntityNotFoundException;
+import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.POI;
+import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.POIRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +43,11 @@ public class POIService {
         }
     }
 
-    public POI save(POI poi){return poiRepository.save(poi);}
+    public POI save(POI poi){
+        poiRepository.save(poi);
+        return poi;
+    }
+
 
     public void deleteById(Long id){
         if (poiRepository.findById(id).isEmpty()){
@@ -50,8 +57,13 @@ public class POIService {
         }
     }
 
-    public Optional<GetPOIdto> edit(Long id, CreatePOIdto poi){
-        return findById(id).map(nuevo ->{
+    public POI edit(Long id, CreatePOIdto poi){
+        Optional<POI> p= poiRepository.findById(id);
+
+        if(p.isEmpty()){
+            throw new EntityNotFoundException(id,POI.class);
+        }
+        return p.map(nuevo ->{
             nuevo.setName(poi.getName());
             nuevo.setDescription(poi.getDescription());
             nuevo.setLocation(poi.getLocation());
@@ -59,9 +71,10 @@ public class POIService {
             nuevo.setCoverPhoto(poi.getCoverPhoto());
             nuevo.setPhoto2(poi.getPhoto2());
             nuevo.setPhoto3(poi.getPhoto3());
-            save(nuevo);
-            return converterPOIdto.converterPOIToPOIdto(nuevo);
-        });
+            poiRepository.save(nuevo);
+            return nuevo;
+        }).get();
     }
+
 
 }

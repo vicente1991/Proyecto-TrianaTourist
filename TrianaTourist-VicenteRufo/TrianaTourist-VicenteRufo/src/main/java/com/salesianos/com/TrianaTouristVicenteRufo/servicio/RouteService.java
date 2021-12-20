@@ -1,5 +1,6 @@
 package com.salesianos.com.TrianaTouristVicenteRufo.servicio;
 
+import com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto.GetPOIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.ConverterDTORoute;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.CreateDTORoutes;
 import com.salesianos.com.TrianaTouristVicenteRufo.dto.routeDTO.GetDTORoutes;
@@ -9,8 +10,6 @@ import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
 import com.salesianos.com.TrianaTouristVicenteRufo.repositorio.RouteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +38,11 @@ public class RouteService {
         }
     }
 
-    public void save(Route r){routeRepository.save(r);}
+    public Route save(CreateDTORoutes r){
+        Route route= dtoRoute.createRouteDTOToRoute(r);
+        routeRepository.save(route);
+        return route;
+    }
 
 
     public void deleteById(Long id){
@@ -50,12 +53,20 @@ public class RouteService {
         }
     }
 
-    public Optional<GetDTORoutes> edit (Long id, CreateDTORoutes c){
-        return findById(id).map(nuevo -> {
+    public Route edit (Long id, CreateDTORoutes c){
+        Optional<Route> r =routeRepository.findById(id);
+
+        if(r.isEmpty()){
+            throw new EntityNotFoundException(id, Route.class);
+        }
+        return r.map(nuevo->{
             nuevo.setName(c.getName());
             nuevo.setPoiList(c.getPoiList());
-            save(nuevo);
-            return dtoRoute.createRouteToRouteDTO(nuevo);
-        });
+            routeRepository.save(nuevo);
+            return nuevo;
+        }).get();
+
     }
+
+
 }
