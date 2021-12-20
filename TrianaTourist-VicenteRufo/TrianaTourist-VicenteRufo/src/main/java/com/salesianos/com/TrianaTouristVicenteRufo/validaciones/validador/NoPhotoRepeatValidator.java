@@ -8,29 +8,26 @@ import javax.validation.ConstraintValidatorContext;
 
 public class NoPhotoRepeatValidator implements ConstraintValidator<NoPhotoRepeat,Object> {
 
-   String coverPhotos;
-   String photo2;
-   String photo3;
+   String[] fotos;
 
     @Override
     public void initialize(NoPhotoRepeat constraintAnnotation) {
-        this.coverPhotos= constraintAnnotation.coverPhoto();
-        this.photo2= constraintAnnotation.photo2();
-        this.photo3= constraintAnnotation.photo3();
+        this.fotos= constraintAnnotation.fields();
 
     }
 
     @Override
     public boolean isValid(Object s, ConstraintValidatorContext constraintValidatorContext) {
-            Object coverPhotoValue = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(coverPhotos);
-            Object photo2Value = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(photo2);
-            Object photo3Value = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(photo3);
-
-            if (coverPhotoValue != null) {
-                return !coverPhotoValue.equals(photo2Value) && !coverPhotoValue.equals(photo3Value) && !photo2Value.equals(photo3Value);
-            } else {
-                return coverPhotoValue == null;
+        for(int i = 0; i< fotos.length; i++) {
+            Object field = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(fotos[i]);
+            for (int j = i + 1; j < fotos.length; j++) {
+                Object field2 = PropertyAccessorFactory.forBeanPropertyAccess(s).getPropertyValue(fotos[j]);
+                if (field == field2) {
+                    return true;
+                }
             }
         }
+        return false;
+    }
     }
 

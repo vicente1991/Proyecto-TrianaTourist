@@ -17,14 +17,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
-@NoPhotoRepeat.List({
-        @NoPhotoRepeat(
-                coverPhoto = "coverPhoto",
-                photo2 = "photo2",
-                photo3 = "photo3",
-                message = "Una de las fotos esta repetida, cambiala"
-        )
-})
+@NoPhotoRepeat(fields = {"coverPhoto", "photo2", "photo3"})
 public class CreatePOIdto {
 
     @NotBlank
