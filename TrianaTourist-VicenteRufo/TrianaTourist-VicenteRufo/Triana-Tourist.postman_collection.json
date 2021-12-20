@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a4e5176c-be0f-4c84-b352-119760b00149",
+		"_postman_id": "58c28ed9-0c92-4c3b-b5c0-79935c3d4d70",
 		"name": "Triana-Tourist",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -150,6 +150,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Ruta Buena\",\r\n    \"poiList\": [{\r\n    \"id\": 2,\r\n    \"name\": \"luismi\",\r\n    \"location\": \"37.3803629,-6.0097717\",\r\n    \"description\": \"Gran profe mejor persona\",\r\n    \"date\": \"2020-12-19T10:21:30\",\r\n    \"category\": {\r\n        \"id\": 1,\r\n        \"name\": \"CalidadBuena\"\r\n    },\r\n    \"coverPhoto\": \"https://triana.salesianos.edu/colegio/wp-content/uploads/sites/2/2021/02/Logo-vertical-segundo-nivel-e1613064985693.png\",\r\n    \"photo2\": null,\r\n    \"photo3\": null\r\n}]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/route/",
 							"host": [
@@ -165,11 +174,30 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "editar route",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"Ruta Buena\",\r\n    \"poiList\": [\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"luismi\",\r\n            \"location\": \"37.3803629,-6.0097717\",\r\n            \"description\": \"Gran profe mejor persona\",\r\n            \"date\": \"2020-12-19T10:21:30\",\r\n            \"categoria\": null,\r\n            \"coverPhoto\": \"https://triana.salesianos.edu/colegio/wp-content/uploads/sites/2/2021/02/Logo-vertical-segundo-nivel-e1613064985693.png\",\r\n            \"photo2\": null,\r\n            \"photo3\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/route/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -178,7 +206,59 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "localhost:8080/route/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir Poi a Ruta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/3/poi/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3",
+								"poi",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pingo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/route/3/poi/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"route",
+								"3",
+								"poi",
+								"2"
+							]
+						}
 					},
 					"response": []
 				}
