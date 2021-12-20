@@ -2,7 +2,6 @@ package com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto;
 
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
-import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple.NoPhotoRepeat;
 import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.simple.UniqueLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
-
 public class CreatePOIdto {
 
     @NotBlank

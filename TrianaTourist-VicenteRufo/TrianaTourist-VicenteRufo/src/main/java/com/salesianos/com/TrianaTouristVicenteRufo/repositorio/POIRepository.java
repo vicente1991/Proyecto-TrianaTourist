@@ -10,4 +10,5 @@ public interface POIRepository extends JpaRepository<POI,Long> {
     boolean existsBylocation (String name);
 
 
+
 }
