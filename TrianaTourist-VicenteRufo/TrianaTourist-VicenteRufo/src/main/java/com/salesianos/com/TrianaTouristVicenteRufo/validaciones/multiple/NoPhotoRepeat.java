@@ -17,9 +17,7 @@ public @interface NoPhotoRepeat {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
-    String coverPhoto();
-    String photo2();
-    String photo3();
+    String[] fotos();
 
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)

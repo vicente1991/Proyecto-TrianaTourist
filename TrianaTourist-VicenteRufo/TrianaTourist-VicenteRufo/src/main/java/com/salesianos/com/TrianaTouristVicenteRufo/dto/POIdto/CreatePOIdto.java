@@ -3,6 +3,7 @@ package com.salesianos.com.TrianaTouristVicenteRufo.dto.POIdto;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Categoria;
 import com.salesianos.com.TrianaTouristVicenteRufo.modelo.Route;
 import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.multiple.NoPhotoRepeat;
+import com.salesianos.com.TrianaTouristVicenteRufo.validaciones.simple.UniqueLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class CreatePOIdto {
 
     @NotBlank
     private String name;
+    @UniqueLocation
     @Pattern(regexp ="^([-+]?\\d{1,2}[.]\\d+),\\s*([-+]?\\d{1,3}[.]\\d+)$",message = "Cambia al formato correcto")
     private String location;
     private String description;
